@@ -1,0 +1,32 @@
+{
+  "name": "how-to-publish-global-package",
+  "version": "1.0.0",
+  "description": "发布NPM全局包的例子",
+  "bin": {
+    "howtopublishglobalpackage": "bin/index.js"
+  },
+  "scripts": {
+    "watch": "babel -w src/ -d bin/",
+    "build": "babel src/ -d bin/"
+  },
+  "repository": "git@github.com:openjavascript/how-to-publish-global-package.git",
+  "author": "suches@vip.qq.com",
+  "license": "MIT",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "chalk": "^2.4.1",
+    "clear": "^0.1.0",
+    "figlet": "^1.2.0",
+    "fs": "^0.0.1-security",
+    "inquirer": "^6.1.0",
+    "path": "^0.12.7",
+    "shelljs": "^0.8.2"
+  }
+}
+
+
+
+
+
