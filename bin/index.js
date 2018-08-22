@@ -7,10 +7,6 @@ var _chalk = require('chalk');
 
 var _chalk2 = _interopRequireDefault(_chalk);
 
-var _clear = require('clear');
-
-var _clear2 = _interopRequireDefault(_clear);
-
 var _figlet = require('figlet');
 
 var _figlet2 = _interopRequireDefault(_figlet);
@@ -39,23 +35,32 @@ var App = function () {
     function App(appRoot, projectRoot, args) {
         _classCallCheck(this, App);
 
+        //node 脚本根目录
         this.appRoot = appRoot;
+        //脚本当前的运行目录
         this.projectRoot = projectRoot;
+        //用户输入的参数
         this.args = args;
-
+        //创建一个用于用户交互的问答功能
         this.prompt = _inquirer2.default.createPromptModule();
-        this.welcome();
+        this.welcome(); //显示欢迎信息
 
         this.captureUserData();
     }
+
+    //显示程序信息
+
 
     _createClass(App, [{
         key: 'welcome',
         value: function welcome() {
             console.log(_chalk2.default.yellow(_figlet2.default.textSync('BIN EXAMPLE', { horizontalLayout: 'full' })));
-
+            //打印用户输入的参数，如果有的话
             args.length && console.log('user args:', args);
         }
+
+        //获取用户输入的内容
+
     }, {
         key: 'captureUserData',
         value: function captureUserData() {
@@ -65,7 +70,9 @@ var App = function () {
             this.q1().then(function () {
                 console.log('q1 done: ' + _this.q1val);
                 return _this.q2();
-            });
+            }).then(function () {
+                console.log('q2 done: ' + _this.q2val);
+            });;
         }
     }, {
         key: 'q1',
