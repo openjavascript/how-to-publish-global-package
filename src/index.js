@@ -4,25 +4,65 @@ import clear from 'clear';
 import figlet from 'figlet';
 import fs from 'fs';
 import path from 'path';
+import inquirer from 'inquirer';
+
+let args = [ ...process.argv ].slice(2);
 
 class App {
-    constructor( appRoot, projectRoot ){
+    constructor( appRoot, projectRoot, args ){
         this.appRoot = appRoot;
         this.projectRoot = projectRoot;
+        this.args = args;
 
+        this.prompt = inquirer.createPromptModule();
         this.welcome();
+
+        this.captureUserData();
     }
 
     welcome() {
         console.log(
           chalk.yellow(
-            figlet.textSync( 'GLOBAL EXAMPLE', { horizontalLayout: 'full' })
+            figlet.textSync( 'BIN EXAMPLE', { horizontalLayout: 'full' })
           )
         );
+
+        args.length && console.log( 'user args:', args );
     }
 
-    sayHello() {
+    captureUserData() {
+        console.log( 'handle user type example' );
+        this.q1().then( ()=> {
+            console.log( `q1 done: ${this.q1val}` );
+            return this.q2();
+        });
+    }
+
+    async q1(){
+        let data = await this.prompt( Q_1 );
+        this.q1val = ( data.q1val || '' ).trim();
+    }
+
+    async q2(){
+        let data = await this.prompt( Q_2 );
+        this.q2val = ( data.q2val || '' ).trim();
     }
 }
 
-let app = new App( path.resolve(__dirname, '..'), process.env.PWD );
+const Q_1 = [
+    { 
+        "name": "q1val"
+        , "type": "input"
+        , "message": "q1: 请随便输入点什么~"
+    }
+];
+const Q_2 = [
+    { 
+        "name": "q2val"
+        , "type": "input"
+        , "message": "q2: 请再随便输入点什么~"
+    }
+];
+
+
+let app = new App( path.resolve(__dirname, '..'), process.env.PWD, args );
