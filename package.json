@@ -1,6 +1,6 @@
 {
   "name": "how-to-publish-global-package",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "发布NPM全局包的例子",
   "bin": {
     "howtopublishglobalpackage": "bin/index.js"
